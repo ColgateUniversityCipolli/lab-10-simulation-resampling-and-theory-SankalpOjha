@@ -47,34 +47,25 @@ This document provides a basic template for the 2-page labs we will complete eac
 \noindent \textbf{Keywords:} What topics does the lab cover concerning class? List 3-4 key terms here, separated by semicolons.
 
 \section{Introduction}
-Provide an overarching summary of what you're talking about. In this section, you introduce the idea to the reader, and your goal is to pull them in. What's the mystery you aim to solve?
+Gallup polls published a document called \textit{“How Are Polls Conducted?”} that describes how Gallup selects people to include in its poll and other details. Gallup states towards the end of the document:
+\\
+\\
+\textit{“For example, with a sample size of 1,000 national adults (derived using careful random selection procedures), the results are highly likely to be accurate within a margin of error of ±4 percentage points.”
+\\
+\\
+“If Gallup increases a poll sample size to 2,000, the results would then be accurate within ±2%
+of the underlying population value, a gain of two percentage points in terms of accuracy, but with a 100\% increase in the cost of conducting the survey.”}
 
-You want to provide enough background to understand the context of the work. Specifically, what is the question you are addressing? If it applies, describe what information currently exists about this problem, including citations, and explain how the question you're answering complements this work.
+In a study from February 3-16, 2025 poll of 1,004 adults aged 18+ living in all 50 U.S. states and the District of Columbia showed that only 39\% of Americans were satisfied with the United States's position in the world, whereas 59\% of people were dissatisfied. Note: 2\% had no opinion on the United States's position. Gallup reported the ±4\% margin of error.
 
-Provide a roadmap of the structure of the paper. 
+Through this lab, we aim to study how larger sample sizes lead to lowering the margin of error. Margin of error is a measure which aims to describe the variation in our using the sample proportion $\hat{p}$ as an estimate of \textit{p}. The measure aims to tell us how much the sample proportion to differ from the proportion for the entire population.
+
+Statisticians and quantitative researchers aim to report their studies with a 95\% confidence.
 
 \subsection{Intro Subsection}
 You might need/want to discuss the topics in subsections. Or, you may have multiple questions.
 
-\begin{Figure}
-% latex table generated in R 4.3.3 by xtable 1.8-4 package
-% Tue Apr  1 07:26:31 2025
-%\begin{table}[H]% YOU NEED TO REPLACE THIS WITH FIGURE
-\centering
-\begin{tabular}{lrrrr}
-  \hline
-species & Mean & Median & SD & IQR \\ 
-  \hline
-Adelie & 3700.66 & 3700.00 & 458.57 & 650.00 \\ 
-  Chinstrap & 3733.09 & 3700.00 & 384.34 & 462.50 \\ 
-  Gentoo & 5076.02 & 5000.00 & 504.12 & 800.00 \\ 
-   \hline
-\end{tabular}
-%\caption{This is a table.} % YOU NEED TO CHANGE THIS TO captionof
-\captionof{table}{This is a table.} 
-\label{tab:penguins}
-%\end{table} % YOU NEED TO REPLACE THIS WITH FIGURE
-\end{Figure}
+
 <<eval=F, echo=F>>=
 library(tidyverse)
 library(palmerpenguins)
