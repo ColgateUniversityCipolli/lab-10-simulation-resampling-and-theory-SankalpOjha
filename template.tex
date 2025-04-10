@@ -127,15 +127,35 @@ In the previous section, we conducted samples based on an assumed value of p, 0.
 \subsection{Simulation over \textit{n} and \textit{p}}
 So far the simulations were conducted under a constrained sample size and proportion. The next simulation aims to represent how the MOE varies as the sample size and proportion change for a sample. Using nested \texttt{for} loops with varying sample sizes from 10 to 3000 in increments of 10, proportions from 0.01 to 0.99 in increments of 0.01, and a set poll size of 10K, as in the basic simulation, simulations were ran for each condition and saved to a \texttt{tibble}. The MOE was summarized using a \verb|geom_raster()| plot. 
 
-\subsection{Actual Margin of Error Calculation}
+\subsection{Wilson MOE Calculation}
+So far, we had been calculating the MOE by halving the range of the middle 95\%. Now, we turn to the Wilson MOE which is giving by the equation: \[\text{MOE}_{\text{w}} = z_{1-\alpha/2}\frac{ \sqrt{n\hat{p}(1-\hat{p}) + \frac{{z^2_{1-\alpha/2}}}{4}}}{n + {z^2_{1-\alpha/2}}}\]
+
+The simulation for this section was ran the same as for the Simulation over \textit{n} and \textit{p} section, but we used the Wilson MOE equation to calculate the MOE. Once again we used \verb|geom_raster()| to summarize the data showing MOE as a function of n and p. 
 
 
+\section{Results By Simulation}
+\subsection{Basic Simulation Results}
+The Basic simulation resulted in an almost Gaussian shape. The first histogram summarizes the sampling distribution for a sample size of $n = 1004$. The bottom histogram summarizes the sampling distribution for a sample size of $n = 2008$. The estimated MOE for the $n = 1004$ sampling distribution is 2.99\%, whereas the estimated MOE for the $n = 2008$ sampling distribution is 2.09\%. As can be seen in the plots, as the sample size increases the distribution tends closer to the defined proportion of 0.39. Through the MOEs it can be seen that Gallup's estimate of a 4\% error for a sample size of $n = 1004$ and 2\% for a sample size of $n = 2008$ are incorrect. Furthermore, doubling the sample size does \textbf{not} halve the MOE, contrary to what Gallup suggested. 
 
-\section{Results}
-Tie together the Introduction -- where you introduce the problem at hand -- and the methods --  what you propose to do to answer the question. Present your data, the results of your analyses, and how each reported aspect contributes to answering the question. This section should include table(s), statistic(s), and graphical displays. Make sure to put the results in a sensible order and that each result contributes a logical and developed solution. It should not just be a list. Avoid being repetitive. 
+\begin{Figure}
+\includegraphics[scale=0.4]{Rplot.pdf}
+\captionof{figure}{This is a figure!}
+\label{plot1}
+\end{Figure}
 
-\subsection{Results Subsection}
-Subsections can be helpful for the Results section, too. This can be particularly helpful if you have different questions to answer. 
+\subsection{Resampling Results}
+The estimated MOE for the resample size of 1000 sampling distribution is 3.09\%
+\begin{center}
+\begin{Figure}
+\includegraphics[scale=0.25]{Rplot01.pdf}
+\captionof{figure}{This is a figure!}
+\label{plot2}
+\end{Figure}
+\end{center}
+
+\subsection{Simulation over \textit{n} and \textit{p} Results}
+
+\subsection{Wilson MOE Results}
 
 
 \section{Discussion}

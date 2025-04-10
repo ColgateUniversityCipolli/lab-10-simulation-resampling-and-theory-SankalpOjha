@@ -40,7 +40,7 @@ basic.plot2 <- ggplot() +
 range2.mid.95 <- quantile(x=polls.basic.sim2, 0.975) - quantile(x=polls.basic.sim2, 0.025)
 margin.of.error2 <- 0.5*range2.mid.95
 
-basic.plot + basic.plot2
+basic.plot / basic.plot2
 
 #Part 2
 resamples <- 1000
@@ -102,7 +102,7 @@ np.plot <- ggplot(data = np.data) +
 
 
 #Actual Margin of Error Calculation
-n.w <- seq(100, 2000, by = 10)
+n.w <- seq(100, 3000, by = 10)
 p.w <- seq(0.01, 0.99, by = 0.01)
 
 z.sample <- rnorm(n=10000)
@@ -130,6 +130,7 @@ wilson.plot <- ggplot(data = wilson.data)+
   theme_bw()+
   ylab("n")+
   geom_vline(xintercept = 0.39)+
-  geom_hline(yintercept = 1004, color = "darkred")
+  geom_hline(yintercept = 1004, color = "red")+
+  geom_hline(yintercept = 2008, color = "skyblue")
 
 np.plot + wilson.plot
