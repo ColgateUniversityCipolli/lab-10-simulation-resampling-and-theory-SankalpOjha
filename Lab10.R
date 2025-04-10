@@ -92,7 +92,7 @@ for (curr.n in n){
 
 np.plot <- ggplot(data = np.data) +
   geom_raster(aes(x = p, y = n, fill = estim.moe)) +
-  scale_fill_distiller("Estimated Margin of Error", palette = "Spectral") +
+  scale_fill_distiller("Estimated Margin of Error", palette = "Set2") +
   theme_bw()+
   geom_vline(xintercept = 0.39)+
   geom_hline(yintercept = 1004, color = "red") +
@@ -125,11 +125,11 @@ for (curr.n in n.w){
 }
 
 wilson.plot <- ggplot(data = wilson.data)+
-  geom_raster(aes(x=wilson.n.val, y=wilson.p.val, fill = wilson.estim.moe))+
-  scale_fill_distiller("Wilson Margin of Error", palette = "Accent")+
+  geom_raster(aes(x = wilson.p.val, y = wilson.n.val, fill = wilson.estim.moe))+
+  scale_fill_distiller("Wilson Margin of Error", palette = "Set2")+
   theme_bw()+
   ylab("n")+
   geom_vline(xintercept = 0.39)+
-  geom_hline(yintercept = 1004, color = "darkred")+
+  geom_hline(yintercept = 1004, color = "darkred")
 
 np.plot + wilson.plot
