@@ -95,7 +95,7 @@
 This document provides a basic template for the 2-page labs we will complete each week. Here, briefly summarize what you did and why it might be helpful. Provide all the top-line conclusions, but avoid providing \emph{all} the details. Results should be limited to ``we show X, Y, and Z."
 \end{abstract}
 
-\noindent \textbf{Keywords:} What topics does the lab cover concerning class? List 3-4 key terms here, separated by semicolons.
+\noindent \textbf{Keywords:} Margin Of Error (MOE).
 
 \section{Introduction}
 Gallup polls published a document called \textit{“How Are Polls Conducted?”} that describes how Gallup selects people to include in its poll and other details. Gallup states towards the end of the document:
@@ -107,27 +107,29 @@ Gallup polls published a document called \textit{“How Are Polls Conducted?”}
 “If Gallup increases a poll sample size to 2,000, the results would then be accurate within ±2%
 of the underlying population value, a gain of two percentage points in terms of accuracy, but with a 100\% increase in the cost of conducting the survey.”}
 
-In a study from February 3-16, 2025 poll of 1,004 adults aged 18+ living in all 50 U.S. states and the District of Columbia showed that only 39\% of Americans were satisfied with the United States's position in the world, whereas 59\% of people were dissatisfied. Note: 2\% had no opinion on the United States's position. Gallup reported the ±4\% margin of error.
+In a study from February 3-16, 2025 poll of 1,004 adults aged 18+ living in all 50 U.S. states and the District of Columbia showed that only 39\% of Americans were satisfied with the United States's position in the world, whereas 59\% of people were dissatisfied. \textbf{Note:} 2\% had no opinion on the United States's position. Gallup reported the ±4\% margin of error.
 
 Through this lab, we aim to study how larger sample sizes lead to lowering the margin of error. Margin of error is a measure which aims to describe the variation in our using the sample proportion $\hat{p}$ as an estimate of \textit{p}. The measure aims to tell us how much the sample proportion to differ from the proportion for the entire population.
 
-Statisticians and quantitative researchers aim to report their studies with a 95\% confidence.
+Statisticians and quantitative researchers aim to report their studies with at least 95\% confidence. Having a 95\% confidence indicates that the researcher is 95\% confident that if we conduct the study repeatedly, the interval would contain the actual proportion 95\% of the time.
 
-\subsection{Intro Subsection}
-You might need/want to discuss the topics in subsections. Or, you may have multiple questions.
+For this lab, we first ran simulations of 10K random polls for a sample size of 1004 individuals and again with a sample size of 2008 individuals to analyze whether the statement of Gallup claiming doubling the sample size will decrease the MOE. Both simulations were conducted assuming we had a known probability, \textit{p}, of 0.39. We then used resampling to obtain the MOE and sampling distribution for $\hat{p}$. We finally ran simulations where we varied both the sample size, n, and probability, p, to see how varying combinations of n and p affect the estimated MOE and Wilson MOE.
+
+\section{Simulations}
+To conduct our basic and resampling simulations, we need to follow the process of setting a sample size, declaring an amount of polls to randomly conduct, and calculating the MOE for the given data. The Simulation over \textit{n} and \textit{p} and Actual Margin of Error Calculation sections differed as they ran simulations varying both the n, sample size, and p, probability, parameters. To summarize the data from our simulations, we used the \texttt{ggplot2} \citep{ggplot2} and \texttt{patchwork} \citep{patchwork} packages to make and combine the plots. We used the \texttt{xtable} \citep{xtable} package to create tables to tabulate our data.
+
+\subsection{Basic Simulation}
+For the basic simulation, we ran a simulation with 10K random polls. We assumed the probability of surveying a satisfied US citizen was 0.39, as giving by the Gallup study. The sample size for the first simulation was $n = 1004$ and $n = 2008$ individuals for the second simulation. We used \texttt{ribom()} to generate our random samples within the constraints.
+
+\subsection{Resampling}
+In the previous section, we conducted samples based on an assumed value of p, 0.39. Resampling will allow us to forgo the assumption made about the sample proportion in the previous section and simulate our own sample distribution of $\hat{p}$ for a Gallup survey. \textbf{Note:} The data which can be used for resampling is constrained to the sample size of $n = 1004$. We ran 1000 resamples to find the sample distribution of $\hat{p}$.
+
+\subsection{Simulation over \textit{n} and \textit{p}}
+So far the simulations were conducted under a constrained sample size and proportion. The next simulation aims to represent how the MOE varies as the sample size and proportion change for a sample. Using nested \texttt{for} loops with varying sample sizes from 10 to 3000 in increments of 10, proportions from 0.01 to 0.99 in increments of 0.01, and a set poll size of 10K, as in the basic simulation, simulations were ran for each condition and saved to a \texttt{tibble}. The MOE was summarized using a \verb|geom_raster()| plot. 
+
+\subsection{Actual Margin of Error Calculation}
 
 
-
-\section{Methods}
-Describe the data you are working with, if applicable. Describe the specific process you will follow to answer the question at hand. This does not mean you should write something like this.
-\begin{quote}
-\textit{I did this and then I did that and then I did this other thing and then..., and then..., and then...}
-\end{quote}
-Instead, it should provide a clear and concise narrative that flows from the problem specification in the Introduction to how you will approach answering it. This is where I would expect to see some citations for \texttt{R} packages you will use to conduct the statistical analysis reported in the Results section.
-
-
-\subsection{Methods Subsection}
-Much like the Introduction, subsections can be helpful for the Methods section. For example, you might describe data collection and the statistical analyses of the collected data in different subsections. Or, you may have different questions that require distinct methods. 
 
 \section{Results}
 Tie together the Introduction -- where you introduce the problem at hand -- and the methods --  what you propose to do to answer the question. Present your data, the results of your analyses, and how each reported aspect contributes to answering the question. This section should include table(s), statistic(s), and graphical displays. Make sure to put the results in a sensible order and that each result contributes a logical and developed solution. It should not just be a list. Avoid being repetitive. 
