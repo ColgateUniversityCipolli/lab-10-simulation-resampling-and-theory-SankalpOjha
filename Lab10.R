@@ -64,6 +64,7 @@ resample.plot <- ggplot(data = p.hat)+
   geom_histogram(aes(x = p, y = after_stat(density)))+
   geom_density(aes(x = p), color = "red")+
   theme_bw()+
+  xlab("p hat")+
   geom_hline(yintercept = 0) +
   ggtitle("Resampling Sampling Distribution, Resample Size = 1000")
 
@@ -128,6 +129,7 @@ wilson.plot <- ggplot(data = wilson.data)+
   geom_raster(aes(x = wilson.p.val, y = wilson.n.val, fill = wilson.estim.moe))+
   scale_fill_distiller("Wilson Margin of Error", palette = "Set2")+
   theme_bw()+
+  xlab("p")+
   ylab("n")+
   geom_vline(xintercept = 0.39)+
   geom_hline(yintercept = 1004, color = "red")+

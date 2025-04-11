@@ -92,10 +92,10 @@
 %\raggedcolumns % If your spacing gets messed up try uncommenting 
                 % this line
 \begin{abstract}
-This document provides a basic template for the 2-page labs we will complete each week. Here, briefly summarize what you did and why it might be helpful. Provide all the top-line conclusions, but avoid providing \emph{all} the details. Results should be limited to ``we show X, Y, and Z."
+In this lab, we analyzed the validity of statements made by the Gallup survey. The Gallup survey states that a sample size of 1004 should produce a 4\% MOE and doubling the sample size should halve the MOE. Both statements were found to be false through the various simulations ran in this lab.
 \end{abstract}
 
-\noindent \textbf{Keywords:} Margin Of Error (MOE).
+\noindent \textbf{Keywords:} Margin Of Error (MOE), Estimated Margin Of Error, Wilson Estimate, Sample Size, and Proportion.
 
 \section{Introduction}
 Gallup polls published a document called \textit{“How Are Polls Conducted?”} that describes how Gallup selects people to include in its poll and other details. Gallup states towards the end of the document:
@@ -116,7 +116,7 @@ Statisticians and quantitative researchers aim to report their studies with at l
 For this lab, we first ran simulations of 10K random polls for a sample size of 1004 individuals and again with a sample size of 2008 individuals to analyze whether the statement of Gallup claiming doubling the sample size will decrease the MOE. Both simulations were conducted assuming we had a known probability, \textit{p}, of 0.39. We then used resampling to obtain the MOE and sampling distribution for $\hat{p}$. We finally ran simulations where we varied both the sample size, n, and probability, p, to see how varying combinations of n and p affect the estimated MOE and Wilson MOE.
 
 \section{Simulations}
-To conduct our basic and resampling simulations, we need to follow the process of setting a sample size, declaring an amount of polls to randomly conduct, and calculating the MOE for the given data. The Simulation over \textit{n} and \textit{p} and Actual Margin of Error Calculation sections differed as they ran simulations varying both the n, sample size, and p, probability, parameters. To summarize the data from our simulations, we used the \texttt{ggplot2} \citep{ggplot2} and \texttt{patchwork} \citep{patchwork} packages to make and combine the plots. We used the \texttt{xtable} \citep{xtable} package to create tables to tabulate our data.
+To conduct our basic and resampling simulations, we need to follow the process of setting a sample size, declaring an amount of polls to randomly conduct, and calculating the MOE for the given data. The Simulation over \textit{n} and \textit{p} and Actual Margin of Error Calculation sections differed as they ran simulations varying both the n, sample size, and p, probability, parameters. To summarize the data from our simulations, we used the \texttt{ggplot2} \citep{ggplot2} and \texttt{patchwork} \citep{patchwork} packages to make and combine the plots.
 
 \subsection{Basic Simulation}
 For the basic simulation, we ran a simulation with 10K random polls. We assumed the probability of surveying a satisfied US citizen was 0.39, as giving by the Gallup study. The sample size for the first simulation was $n = 1004$ and $n = 2008$ individuals for the second simulation. We used \texttt{ribom()} to generate our random samples within the constraints.
@@ -125,7 +125,7 @@ For the basic simulation, we ran a simulation with 10K random polls. We assumed 
 In the previous section, we conducted samples based on an assumed value of p, 0.39. Resampling will allow us to forgo the assumption made about the sample proportion in the previous section and simulate our own sample distribution of $\hat{p}$ for a Gallup survey. \textbf{Note:} The data which can be used for resampling is constrained to the sample size of $n = 1004$. We ran 1000 resamples to find the sample distribution of $\hat{p}$.
 
 \subsection{Simulation over \textit{n} and \textit{p}}
-So far the simulations were conducted under a constrained sample size and proportion. The next simulation aims to represent how the MOE varies as the sample size and proportion change for a sample. Using nested \texttt{for} loops with varying sample sizes from 10 to 3000 in increments of 10, proportions from 0.01 to 0.99 in increments of 0.01, and a set poll size of 10K, as in the basic simulation, simulations were ran for each condition and saved to a \texttt{tibble}. The MOE was summarized using a \verb|geom_raster()| plot. 
+So far the simulations were conducted under a constrained sample size and proportion. The next simulation aims to represent how the MOE varies as the sample size and proportion change for a sample. Using nested \texttt{for} loops with varying sample sizes from 100 to 3000 in increments of 10, proportions from 0.01 to 0.99 in increments of 0.01, and a set poll size of 10K, as in the basic simulation, simulations were ran for each condition and saved to a \texttt{tibble}. The MOE was summarized using a \verb|geom_raster()| plot. 
 
 \subsection{Wilson MOE Calculation}
 So far, we had been calculating the MOE by halving the range of the middle 95\%. Now, we turn to the Wilson MOE which is giving by the equation: \[\text{MOE}_{\text{w}} = z_{1-\alpha/2}\frac{ \sqrt{n\hat{p}(1-\hat{p}) + \frac{{z^2_{1-\alpha/2}}}{4}}}{n + {z^2_{1-\alpha/2}}}\]
@@ -139,38 +139,32 @@ The Basic simulation resulted in an almost Gaussian shape. The first histogram s
 
 \begin{Figure}
 \includegraphics[scale=0.4]{Rplot.pdf}
-\captionof{figure}{This is a figure!}
+\captionof{figure}{Plots for Sampling Distribution of $p$}
 \label{plot1}
 \end{Figure}
 
 \subsection{Resampling Results}
-The estimated MOE for the resample size of 1000 sampling distribution is 3.09\%
+The estimated MOE for sampling distribution of $\hat{p}$ with a sample size of $n = 1004$ is 3.09\%. This is once again not near the 4\% MOE presented by Gallup. The sampling distribution itself is approximately Gaussian. Upon visual inspection, the sampling distribution for $\hat{p}$ is centered at roughly a $\hat{p}$ value of 0.39, which is similar to the proportion used in the Basic Simulation.
+
 \begin{center}
 \begin{Figure}
-\includegraphics[scale=0.25]{Rplot01.pdf}
-\captionof{figure}{This is a figure!}
+\includegraphics[scale=0.35]{Rplot01.pdf}
+\captionof{figure}{Plots for Resampling Sampling Distribution of $\hat{p}$}
 \label{plot2}
 \end{Figure}
 \end{center}
 
-\subsection{Simulation over \textit{n} and \textit{p} Results}
-
-\subsection{Wilson MOE Results}
+\subsection{\textit{n} and \textit{p} MOE and Wilson MOE Results}
+In the appendix, Figure \ref{plot3} shows the \verb|geom_raster()| plot showing the heat map of how n and p affect the estimated MOE (plot on the left) and how n and p affect the Wilson MOE (plot on the right). Both plots look fairly similar and follow a similar gradient as n increases from 100 to 3000. It should be noted that the p seems to be a larger factor which affects both the estimated MOE and Wilson MOE, in comparison to n for lower values of n. As we look across a the plot for a given n, for example $n = 150$, we can notice how the value of p greatly varies the MOEs. The power of large sample sizes can be seen through both plots as larger samples supply more information which lowers ambiguity, MOE values. Through both plots, we can also notice the intersection of $n = 2008$, $n = 1004$, and $p = 0.39$ lines correspond to the MOE values found in the earlier simulations. The final component of the plots which was interesting is that the transition between the various regions is smoother in the Wilson plot, whereas the Estimated plot has portions which are grainy.
 
 
 \section{Discussion}
- You should objectively evaluate the evidence you found in the data. Do not embellish or wish-terpet (my made-up phase for making an interpretation you, or the researcher, wants to be true without the data \emph{actually} supporting it). Connect your findings to the existing information you provided in the Introduction.
-
-Finally, provide some concluding remarks that tie together the entire paper. Think of the last part of the results as abstract-like. Tell the reader what they just consumed -- what's the takeaway message?
+Through this lab, it was demonstrated that larger sample sizes lower lead to low MOE calculations and Gallup's statements about how MOE values change with changing the sample size are false. As shown through the \verb|geom_raster()| plots, the MOE calculations approach zero as the sample size increases to 3000. The greater number of samples leads to less ambiguity about the sample. Further the 4\% error mentioned in the Gallup survey did not hold true for our simulations. The second statement about doubling the sample size leads to halved MOE also does not hold. MOE is function of two variables, n and p, so we cannot simply halve the MOE when we double sample size.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Bibliography
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \vspace{2em}
-
-\noindent\textbf{Bibliography:} Note that when you add citations to your bib.bib file \emph{and}
-you cite them in your document, the bibliography section will automatically populate here.
-
 \begin{tiny}
 \bibliography{bib8}
 \end{tiny}
@@ -183,6 +177,10 @@ you cite them in your document, the bibliography section will automatically popu
 \onecolumn
 \section{Appendix}
 
-If you have anything extra, you can add it here in the appendix. This can include images or tables that don't work well in the two-page setup, code snippets you might want to share, etc.
+\begin{Figure}
+\includegraphics[scale=0.5]{Rplot02.pdf}
+\captionof{figure}{Plots Showing The Realtionship Between MOE Values, n, and p}
+\label{plot3}
+\end{Figure}
 
 \end{document}
